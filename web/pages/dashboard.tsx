@@ -1,11 +1,21 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { FiClock, FiArrowUpCircle, FiArrowDownCircle, FiDollarSign } from 'react-icons/fi'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { FiArrowDownCircle, FiDollarSign, FiInfo, FiMenu, FiArrowUpCircle } from 'react-icons/fi'
 import { format } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
-import DayPicker, { DayModifiers } from 'react-day-picker'
-import 'react-day-picker/lib/style.css'
 
-import { Container, Header, HeaderContent, Content, Categories, NextAppointment, Section, Appointment, Calendar } from '../styles/pages/dashboard'
+import {
+    Container,
+    Header,
+    HeaderContent,
+    UpperContent,
+    Categories,
+    Title,
+    Description,
+    Category,
+    Total,
+    Value,
+    InputArea,
+} from '../styles/pages/dashboard'
 
 import Logo from '../components/Logo'
 import Menu from '../components/Menu'
@@ -13,6 +23,7 @@ import Card from '../components/MoneyCard'
 
 import { useAuth } from '../hooks/Auth'
 import api from '../services/api'
+import AddTransaction from '../components/AddTransaction'
 
 interface Appointment {
     id: string
@@ -24,11 +35,12 @@ interface Appointment {
     }
 }
 
-const months = ['Janeiro', 'Fevereiro', 'Ma']
+type InputTypes = 'Category' | 'Transaction'
 
 const Dashboard: React.FC = () => {
     const { signOut, user } = useAuth()
     const [currentMonth, setCurrentMonth] = useState(new Date())
+    const [input, setInput] = useState<InputTypes>('Transaction')
 
     const handleMonthChange = useCallback((month: Date) => {
         setCurrentMonth(month)
@@ -55,48 +67,81 @@ const Dashboard: React.FC = () => {
                 </HeaderContent>
             </Header>
 
-            <Content>
+            <UpperContent>
                 <Categories>
-                    <h1>Horários agendados</h1>
+                    <Title>
+                        <a>
+                            <img src='/plus-circle.svg' alt='Adicionar Categoria' />
+                        </a>
+                        <h1>Categorias</h1>
+                    </Title>
 
-                    <NextAppointment>
-                        <strong>Agendamento a seguir</strong>
+                    <Description>
+                        <span>Título</span>
+                        <span>Planejado</span>
+                        <span>Disponível</span>
+                        <span>Utilizado</span>
+                    </Description>
 
+                    <Category>
+                        <strong>16 caracteres</strong>
+                        <span>R$ 12.000,00</span>
+                        <Value greaterThanZero={true}>R$ 10.000,00</Value>
+                        <span>R$ 2.000,00</span>
+                        <FiMenu size={24} />
+                    </Category>
+
+                    <Category>
+                        <strong>Mensais</strong>
+                        <span>R$ 12.000,00</span>
+                        <Value greaterThanZero={true}>R$ 4.000,00</Value>
+                        <span>R$ 8.000,00</span>
+                        <FiMenu size={24} />
+                    </Category>
+
+                    <Category>
+                        <strong>Outros</strong>
+                        <span>R$ 12.000,00</span>
+                        <Value greaterThanZero={false}>R$ -912.000,00</Value>
+                        <span>R$ 24.000,00</span>
+                        <FiMenu size={24} />
+                    </Category>
+
+                    <Total>
                         <div>
-                            <img src='logo-icon.svg' alt='avatar' />
-
-                            <strong>Nome</strong>
-                            <span>
-                                <FiClock /> 10:00
-                            </span>
+                            <strong>Total</strong>
                         </div>
-                    </NextAppointment>
-
-                    <Section>
-                        <strong>Manhã</strong>
-
-                        <p> Nenhum agendamento para este período</p>
-                    </Section>
-
-                    <Section>
-                        <strong>Tarde</strong>
-
-                        <Appointment>
-                            <span>
-                                <FiClock /> 12:00
-                            </span>
-
-                            <div>
-                                <img src='logo-icon.svg' alt='avatar' />
-
-                                <strong>Nome</strong>
+                        <div>
+                            <div className='data'>
+                                <strong>R$ 12.000,00</strong>
+                                <FiInfo size={16} />
                             </div>
-                        </Appointment>
-                    </Section>
+                        </div>
+                        <div>
+                            <div className='data'>
+                                <strong>Extra</strong>
+                                <Value greaterThanZero={true}>R$ 2.000,00</Value>
+                                <FiInfo size={16} />
+                            </div>
+                            <div className='data'>
+                                <strong>Conta</strong>
+                                <Value greaterThanZero={false}>R$ -122.000,00</Value>
+                                <FiInfo size={16} />
+                            </div>
+                        </div>
+                        <div>
+                            <div className='data'>
+                                <strong>R$ 12.000,00</strong>
+                                <FiInfo size={16} />
+                            </div>
+                        </div>
+                    </Total>
                 </Categories>
 
-                <Calendar></Calendar>
-            </Content>
+                <InputArea>
+                    <AddTransaction />
+                </InputArea>
+            </UpperContent>
         </Container>
     )
 }

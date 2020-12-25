@@ -10,7 +10,7 @@ type CardProps = {
     iconColor: string
 }
 
-const Button: React.FC<CardProps> = ({ title, value, icon: Icon, iconColor }: CardProps) => {
+const MoneyCard: React.FC<CardProps> = ({ title, value, icon: Icon, iconColor }: CardProps) => {
     return (
         <Container>
             <div>
@@ -23,4 +23,4 @@ const Button: React.FC<CardProps> = ({ title, value, icon: Icon, iconColor }: Ca
     )
 }
 
-export default Button
+export default MoneyCard
