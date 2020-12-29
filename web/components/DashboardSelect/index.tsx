@@ -14,7 +14,7 @@ interface InputProps extends SelectProps {
 
 const DashboardSelect: React.FC<InputProps> = ({ containerStyle, icon: Icon, ...attributes }) => {
     const { fieldName, defaultValue, error, registerField } = useField(attributes.name)
-    const inputRef = useRef<HTMLInputElement>(null)
+    const inputRef = useRef<SelectProps>(null)
     const [isFocused, setIsFocused] = useState(false)
     const [isFilled, setIsFilled] = useState(false)
 
