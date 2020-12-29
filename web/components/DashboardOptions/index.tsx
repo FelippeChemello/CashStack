@@ -4,7 +4,7 @@ import { useField } from '@unform/core'
 import { FiAlertCircle } from 'react-icons/fi'
 import ReactSelect, { OptionTypeBase, Props as SelectProps } from 'react-select'
 
-import { Container, Error, Label } from './styles'
+import { Container, Label } from './styles'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
     name: string
