@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import ReactSelector, { OptionTypeBase, Props as SelectorProps } from 'react-select'
 
 import Tooltip from '../Tooltip'
 
@@ -6,6 +7,10 @@ interface ContainerProps {
     isFocused: boolean
     isFilled: boolean
     isErrored: boolean
+}
+
+interface SelectProps extends SelectorProps {
+    ref: any
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -92,3 +97,5 @@ export const Error = styled(Tooltip)`
         }
     }
 `
+
+export const ReactSelect = styled(ReactSelector)<SelectProps>``

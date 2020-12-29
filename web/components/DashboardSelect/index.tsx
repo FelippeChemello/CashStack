@@ -2,9 +2,9 @@ import React, { InputHTMLAttributes, useEffect, useRef, useState, useCallback, S
 import { IconBaseProps } from 'react-icons/lib'
 import { useField } from '@unform/core'
 import { FiAlertCircle } from 'react-icons/fi'
-import ReactSelect, { OptionTypeBase, Props as SelectProps } from 'react-select'
+import { OptionTypeBase, Props as SelectProps } from 'react-select'
 
-import { Container, Error } from './styles'
+import { Container, Error, ReactSelect } from './styles'
 
 interface InputProps extends SelectProps {
     name: string
