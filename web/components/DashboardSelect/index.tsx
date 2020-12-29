@@ -9,9 +9,10 @@ import { Container, Error } from './styles'
 interface InputProps extends SelectProps {
     name: string
     containerStyle?: object
+    icon?: React.ComponentType<IconBaseProps>
 }
 
-const DashboardSelect: React.FC<InputProps> = ({ containerStyle, ...attributes }) => {
+const DashboardSelect: React.FC<InputProps> = ({ containerStyle, icon: Icon, ...attributes }) => {
     const { fieldName, defaultValue, error, registerField } = useField(attributes.name)
     const inputRef = useRef<HTMLInputElement>(null)
     const [isFocused, setIsFocused] = useState(false)
@@ -39,36 +40,17 @@ const DashboardSelect: React.FC<InputProps> = ({ containerStyle, ...attributes }
     const handleInputBlur = useCallback(() => {
         setIsFocused(false)
 
-        setIsFilled(Boolean(inputRef.current?.value))
+        setIsFilled(Boolean(inputRef.current?.state?.value?.value))
     }, [])
 
     const handleInputFocus = useCallback(() => {
         setIsFocused(true)
     }, [])
 
-    const customStyles = {
-        menu: (provided, state) => ({
-            ...provided,
-            width: state.selectProps.width,
-            borderBottom: '1px dotted pink',
-            color: state.selectProps.menuColor,
-            padding: 20,
-        }),
-
-        control: (_, { selectProps: { width } }) => ({
-            width: width,
-        }),
-
-        singleValue: (provided, state) => {
-            const opacity = state.isDisabled ? 0.5 : 1
-            const transition = 'opacity 300ms'
-
-            return { ...provided, opacity, transition }
-        },
-    }
-
     return (
         <Container style={containerStyle} isErrored={Boolean(error)} isFocused={isFocused} isFilled={isFilled}>
+            {Icon && <Icon size={24} />}
+
             <ReactSelect
                 defaultValue={defaultValue}
                 ref={inputRef}
@@ -76,7 +58,6 @@ const DashboardSelect: React.FC<InputProps> = ({ containerStyle, ...attributes }
                 placeholder='Selecione...'
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
-                styles={customStyles}
                 {...attributes}
             />
 

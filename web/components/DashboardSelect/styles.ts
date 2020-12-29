@@ -11,7 +11,8 @@ interface ContainerProps {
 export const Container = styled.div<ContainerProps>`
     background: #fff;
     border-radius: 10px;
-    padding: 12px;
+    padding: 5px 10px;
+    margin-top: 8px;
     width: 100%;
     border: 2px solid #969cb2;
     color: #666360;
@@ -21,34 +22,32 @@ export const Container = styled.div<ContainerProps>`
 
     > div {
         width: 100%;
-
-        > div {
-            border: 0;
-        }
     }
 
-    
+    .react-select__control,
+    .react-select__control--is-focused,
+    .react-select__control--menu-is-open {
+        border: 0 !important;
+        box-shadow: none !important;
+    }
 
     ${props =>
         props.isErrored &&
         css`
             border-color: #c53030;
         `}
-
     ${props =>
         props.isFocused &&
         css`
             color: #4963f4;
             border-color: #4963f4;
         `}
-
-    ${props =>
+        ${props =>
         props.isFilled &&
         css`
             color: #4963f4;
         `}
-
-    span {
+        span {
         margin-right: 8px;
         color: #969cb2;
 
@@ -71,8 +70,8 @@ export const Container = styled.div<ContainerProps>`
         }
     }
 
-    svg {
-        margin-right: 10px;
+    > svg {
+        color: ${props => (props.isFilled || props.isFocused ? '#4963f4' : '#969CB2')};
     }
 `
 

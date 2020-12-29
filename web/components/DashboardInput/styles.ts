@@ -11,17 +11,14 @@ interface ContainerProps {
 export const Container = styled.div<ContainerProps>`
     background: #fff;
     border-radius: 10px;
-    padding: 12px;
+    padding: 10px;
+    margin-top: 8px;
     width: 100%;
     border: 2px solid #969cb2;
     color: #666360;
 
     display: flex;
     align-items: center;
-
-    & + div {
-        margin-top: 8px;
-    }
 
     ${props =>
         props.isErrored &&
@@ -49,7 +46,7 @@ export const Container = styled.div<ContainerProps>`
         ${props =>
             (props.isFocused || props.isFilled) &&
             css`
-                color: #363f5f;
+                color: #4963f4;
             `}
     }
 
@@ -58,15 +55,31 @@ export const Container = styled.div<ContainerProps>`
         width: 50px;
         background: transparent;
         border: 0;
-        color: #363f5f;
+        color: ${props => (props.isFocused || props.isFilled ? '#363f5f' : '#969cb2')};
 
         &::placeholder {
             color: #969cb2;
         }
+
+        ::-webkit-calendar-picker-indicator {
+            filter: ${props =>
+                props.isFilled || props.isFocused
+                    ? 'invert(35%) sepia(97%) saturate(3350%) hue-rotate(223deg) brightness(99%) contrast(93%)'
+                    : 'invert(75%) sepia(9%) saturate(594%) hue-rotate(190deg) brightness(83%) contrast(84%)'};
+
+            // Cores obtidas através da seguinte técnica https://stackoverflow.com/questions/42966641/how-to-transform-black-into-any-given-color-using-only-css-filters
+        }
     }
 
     svg {
-        margin-right: 10px;
+        margin-right: 8px;
+        color: #969cb2;
+
+        ${props =>
+            (props.isFocused || props.isFilled) &&
+            css`
+                color: #4963f4;
+            `}
     }
 `
 

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { FiArrowDownCircle, FiDollarSign, FiInfo, FiMenu, FiArrowUpCircle } from 'react-icons/fi'
+import { FiArrowDownCircle, FiDollarSign, FiInfo, FiMenu, FiArrowUpCircle, FiChevronDown } from 'react-icons/fi'
 import { format } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 
@@ -15,15 +15,17 @@ import {
     Total,
     Value,
     InputArea,
+    Info,
+    ReactSelect,
 } from '../styles/pages/dashboard'
 
 import Logo from '../components/Logo'
 import Menu from '../components/Menu'
 import Card from '../components/MoneyCard'
+import AddTransaction from '../components/AddTransaction'
 
 import { useAuth } from '../hooks/Auth'
 import api from '../services/api'
-import AddTransaction from '../components/AddTransaction'
 
 interface Appointment {
     id: string
@@ -58,7 +60,26 @@ const Dashboard: React.FC = () => {
 
                     <Menu />
                 </HeaderContent>
-                <h1 onClick={() => console.log('Trocar mês')}>{formattedMonth}</h1>
+
+                <ReactSelect
+                    classNamePrefix='month-selector'
+                    placeholder='Dezembro | 2020'
+                    options={[
+                        { value: '1', label: 'Janeiro | 8888' },
+                        { value: '2', label: 'Fevereiro | 8888' },
+                        { value: '3', label: 'Março | 8888' },
+                        { value: '4', label: 'Abril | 8888' },
+                        { value: '5', label: 'Maio | 8888' },
+                        { value: '6', label: 'Junho | 8888' },
+                        { value: '7', label: 'Julho | 8888' },
+                        { value: '8', label: 'Agosto | 8888' },
+                        { value: '9', label: 'Setembro | 8888' },
+                        { value: '10', label: 'Outubro | 8888' },
+                        { value: '11', label: 'Novembro | 8888' },
+                        { value: '12', label: 'Dezembro | 8888' },
+                    ]}
+                />
+
                 <HeaderContent>
                     <Card title='Entradas' value='17400.50' icon={FiArrowUpCircle} iconColor='#12A454' />
                     <Card title='Saídas' value='7400.50' icon={FiArrowDownCircle} iconColor='#E83F5B' />
@@ -80,7 +101,7 @@ const Dashboard: React.FC = () => {
                         <span>Título</span>
                         <span>Planejado</span>
                         <span>Disponível</span>
-                        <span>Utilizado</span>
+                        <span>Movimentado</span>
                     </Description>
 
                     <Category>
@@ -114,25 +135,33 @@ const Dashboard: React.FC = () => {
                         <div>
                             <div className='data'>
                                 <strong>R$ 12.000,00</strong>
-                                <FiInfo size={16} />
+                                <Info title='Total de entrada de valores no mês'>
+                                    <FiInfo size={16} />
+                                </Info>
                             </div>
                         </div>
                         <div>
                             <div className='data'>
                                 <strong>Extra</strong>
                                 <Value greaterThanZero={true}>R$ 2.000,00</Value>
-                                <FiInfo size={16} />
+                                <Info title='Total de entradas de valores do mês subtraindo os Valores planejados de cada categoria e eventuais valores negativos de cada categoria'>
+                                    <FiInfo size={16} />
+                                </Info>
                             </div>
                             <div className='data'>
                                 <strong>Conta</strong>
                                 <Value greaterThanZero={false}>R$ -122.000,00</Value>
-                                <FiInfo size={16} />
+                                <Info title='Valor que você deve ter na conta atualmente. Utilizado para validação dos valores inseridos na plataforma.'>
+                                    <FiInfo size={16} />
+                                </Info>
                             </div>
                         </div>
                         <div>
                             <div className='data'>
                                 <strong>R$ 12.000,00</strong>
-                                <FiInfo size={16} />
+                                <Info title='Total de saídas de valores no mês'>
+                                    <FiInfo size={16} />
+                                </Info>
                             </div>
                         </div>
                     </Total>

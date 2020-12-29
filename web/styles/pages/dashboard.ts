@@ -1,5 +1,7 @@
 import { shade } from 'polished'
 import styled from 'styled-components'
+import Tooltip from '../../components/Tooltip'
+import ReactSelector from 'react-select'
 
 interface ValueProps {
     greaterThanZero: boolean
@@ -38,14 +40,46 @@ export const HeaderContent = styled.div`
             }
         }
     }
+`
 
-    + h1 {
-        margin: 0 auto;
-        margin-top: 14px;
-        width: 1120px;
-        font-size: 24px;
-        font-weight: medium;
+export const ReactSelect = styled(ReactSelector)`
+    margin: 0 auto;
+    margin-top: 14px;
+    width: 1120px;
+    font-size: 24px;
+    font-weight: medium;
+    color: #fff;
+    align-items: center;
+
+    .month-selector__indicator-separator {
+        display: none;
+    }
+
+    .month-selector__control,
+    .month-selector__control--is-focused,
+    .month-selector__control--menu-is-open {
+        border: 0 !important;
+        box-shadow: none !important;
+    }
+
+    > div {
+        width: 250px;
+    }
+
+    div {
+        background-color: transparent;
         color: #fff;
+        border: 0;
+        outline: none;
+        box-shadow: 0;
+    }
+
+    .month-selector__menu {
+        background-color: #fff;
+    }
+
+    .month-selector__option {
+        color: #363f5f;
     }
 `
 
@@ -58,27 +92,6 @@ export const UpperContent = styled.main`
 export const Categories = styled.div`
     flex: 1;
     margin-right: 48px;
-
-    p {
-        margin-top: 8px;
-        color: #ff9000;
-        display: flex;
-        align-items: center;
-        font-weight: 500;
-
-        span {
-            display: flex;
-            align-items: center;
-        }
-
-        span + span::before {
-            content: '';
-            background: #ff9000;
-            width: 1px;
-            height: 12px;
-            margin: 0 8px;
-        }
-    }
 `
 
 export const Title = styled.div`
@@ -189,4 +202,23 @@ export const InputArea = styled.aside`
 
     display: flex;
     flex-direction: column;
+`
+
+export const Info = styled(Tooltip)`
+    height: 20px;
+    margin-left: 10px;
+
+    svg {
+        margin: 0;
+    }
+
+    span {
+        background: #fff;
+        color: #969cb2;
+        border: 1.5px solid #969cb2;
+
+        &::before {
+            border-color: #969cb2 transparent;
+        }
+    }
 `
