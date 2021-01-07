@@ -1,10 +1,14 @@
-import { shade } from 'polished'
+import { lighten } from 'polished'
 import styled from 'styled-components'
 import Tooltip from '../../components/Tooltip'
 import ReactSelector from 'react-select'
 
 interface ValueProps {
     greaterThanZero: boolean
+}
+
+interface ContentSectionProps {
+    direction?: 'row' | 'column'
 }
 
 export const Container = styled.div``
@@ -83,10 +87,11 @@ export const ReactSelect = styled(ReactSelector)`
     }
 `
 
-export const UpperContent = styled.main`
+export const ContentSection = styled.main<ContentSectionProps>`
     max-width: 1120px;
     margin: 64px auto;
     display: flex;
+    flex-direction: ${props => (props.direction ? props.direction : 'column')};
 `
 
 export const Categories = styled.div`
@@ -185,6 +190,57 @@ export const Total = styled.div`
         color: #363f5f;
         margin-left: 4px;
         stroke-width: 1.5px;
+    }
+`
+
+export const TransactionDescription = styled.div`
+    flex: 1;
+    padding: 0 32px;
+    margin-top: 4px;
+
+    display: grid;
+    grid-template-columns: 40px auto 135px 190px 120px 40px;
+    column-gap: 1em;
+
+    span + span + span {
+        text-align: center;
+    }
+`
+
+export const Transaction = styled.div`
+    flex: 1;
+    padding: 16px 32px;
+    margin-top: 4px;
+    border-radius: 10px;
+    background-color: #fff;
+
+    display: grid;
+    grid-template-columns: 40px auto 135px 190px 120px 40px;
+    column-gap: 1em;
+
+    + div {
+        margin-top: 8px;
+    }
+
+    span {
+        text-align: center;
+    }
+
+    span.category {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+            color: #969cb2;
+            width: 20px;
+            height: 100%;
+            margin-right: 5px;
+        }
+    }
+
+    svg {
+        color: #363f5f;
     }
 `
 

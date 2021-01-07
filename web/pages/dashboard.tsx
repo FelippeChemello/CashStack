@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { FiArrowDownCircle, FiDollarSign, FiInfo, FiMenu, FiArrowUpCircle, FiChevronDown } from 'react-icons/fi'
+import { FiArrowDownCircle, FiDollarSign, FiInfo, FiMenu, FiArrowUpCircle, FiChevronDown, FiAlertTriangle } from 'react-icons/fi'
 import { format } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 
@@ -7,7 +7,7 @@ import {
     Container,
     Header,
     HeaderContent,
-    UpperContent,
+    ContentSection,
     Categories,
     Title,
     Description,
@@ -17,12 +17,15 @@ import {
     InputArea,
     Info,
     ReactSelect,
+    TransactionDescription,
+    Transaction,
 } from '../styles/pages/dashboard'
 
 import Logo from '../components/Logo'
 import Menu from '../components/Menu'
 import Card from '../components/MoneyCard'
 import AddTransaction from '../components/AddTransaction'
+import AddCategory from '../components/AddCategory'
 
 import { useAuth } from '../hooks/Auth'
 import api from '../services/api'
@@ -88,11 +91,11 @@ const Dashboard: React.FC = () => {
                 </HeaderContent>
             </Header>
 
-            <UpperContent>
+            <ContentSection direction='row' style={{ marginBottom: '32px' }}>
                 <Categories>
                     <Title>
-                        <a>
-                            <img src='/plus-circle.svg' alt='Adicionar Categoria' />
+                        <a onClick={() => setInput('Category')}>
+                            <img src='/plus-circle.svg' alt='Adicionar categoria' />
                         </a>
                         <h1>Categorias</h1>
                     </Title>
@@ -167,10 +170,85 @@ const Dashboard: React.FC = () => {
                     </Total>
                 </Categories>
 
-                <InputArea>
-                    <AddTransaction />
-                </InputArea>
-            </UpperContent>
+                <InputArea>{input === 'Transaction' ? <AddTransaction /> : <AddCategory />}</InputArea>
+            </ContentSection>
+
+            <ContentSection style={{ marginTop: '0px' }}>
+                <Title>
+                    <a onClick={() => setInput('Transaction')}>
+                        <img src='/plus-circle.svg' alt='Adicionar movimentação' />
+                    </a>
+                    <h1>Movimentações</h1>
+                </Title>
+
+                <TransactionDescription>
+                    <span></span>
+                    <span>Título</span>
+                    <span>Valor</span>
+                    <span>Categoria</span>
+                    <span>Data</span>
+                </TransactionDescription>
+
+                <Transaction>
+                    <FiAlertTriangle size={24} />
+                    <strong>32 caracteres podem entrar aqui@</strong>
+                    <Value greaterThanZero={true}>R$ 10.000,00</Value>
+                    <span className='category'>
+                        <FiDollarSign />
+                        16 caracteres ak
+                    </span>
+                    <span>28/12/2088</span>
+                    <FiMenu size={24} />
+                </Transaction>
+
+                <Transaction>
+                    <FiAlertTriangle size={24} />
+                    <strong>32 caracteres podem entrar aqui@</strong>
+                    <Value greaterThanZero={true}>R$ 10.000,00</Value>
+                    <span className='category'>
+                        <FiDollarSign />
+                        16 caracteres ak
+                    </span>
+                    <span>28/12/2088</span>
+                    <FiMenu size={24} />
+                </Transaction>
+
+                <Transaction>
+                    <FiAlertTriangle size={24} />
+                    <strong>32 caracteres podem entrar aqui@</strong>
+                    <Value greaterThanZero={true}>R$ 10.000,00</Value>
+                    <span className='category'>
+                        <FiDollarSign />
+                        16 caracteres ak
+                    </span>
+                    <span>28/12/2088</span>
+                    <FiMenu size={24} />
+                </Transaction>
+
+                <Transaction>
+                    <FiAlertTriangle size={24} />
+                    <strong>32 caracteres podem entrar aqui@</strong>
+                    <Value greaterThanZero={true}>R$ 10.000,00</Value>
+                    <span className='category'>
+                        <FiDollarSign />
+                        16 caracteres ak
+                    </span>
+                    <span>28/12/2088</span>
+                    <FiMenu size={24} />
+                </Transaction>
+
+                <Transaction>
+                    <FiAlertTriangle size={24} />
+                    <strong>32 caracteres podem entrar aqui@</strong>
+                    <Value greaterThanZero={true}>R$ 10.000,00</Value>
+                    <span className='category'>
+                        <FiDollarSign />
+                        16 caracteres ak
+                    </span>
+                    <span>28/12/2088</span>
+                    <FiMenu size={24} />
+                </Transaction>
+            </ContentSection>
         </Container>
     )
 }

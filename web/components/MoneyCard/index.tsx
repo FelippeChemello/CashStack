@@ -1,8 +1,6 @@
 import React from 'react'
 import { IconBaseProps } from 'react-icons/lib'
 
-import ReactLoading from 'react-loading'
-
 import { Container } from './styles'
 
 type CardProps = {

@@ -20,7 +20,7 @@ const AddTransaction: React.FC = () => {
         <Form ref={formRef} onSubmit={data => console.log(data)}>
             <h1 style={{ marginBottom: 16 }}>Adicionar transação</h1>
 
-            <DashboardInput placeholder='Título' name='title' maxLength={16} icon={FiAward} />
+            <DashboardInput placeholder='Título' name='title' maxLength={32} icon={FiAward} />
             <DashboardInput type='text' currency placeholder='Valor' name='value' prefix='R$ ' maxLength={16} />
             <DashboardInput type='date' placeholder='Data' name='date' />
             <DashboardSelect
@@ -33,7 +33,7 @@ const AddTransaction: React.FC = () => {
                 icon={FiMenu}
             />
             <DashboardOptions
-                name='transactionType'
+                name='transactionDirection'
                 options={[
                     { id: 'income', label: 'Entrada', value: 'income', icon: FiArrowUpCircle, iconColor: '#12A454' },
                     { id: 'outcome', label: 'Saída', value: 'outcome', icon: FiArrowDownCircle, iconColor: '#E83F5B' },
