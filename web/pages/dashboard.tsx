@@ -19,6 +19,7 @@ import {
     ReactSelect,
     TransactionDescription,
     Transaction,
+    Month,
 } from '../styles/pages/dashboard'
 
 import Logo from '../components/Logo'
@@ -59,35 +60,37 @@ const Dashboard: React.FC = () => {
         <Container>
             <Header>
                 <HeaderContent>
-                    <Logo mode='light' />
+                    <div>
+                        <FiMenu size={32} />
+                        <Logo mode='light' />
+                    </div>
 
-                    <Menu />
-                </HeaderContent>
-
-                <ReactSelect
-                    classNamePrefix='month-selector'
-                    placeholder='Dezembro | 2020'
-                    options={[
-                        { value: '1', label: 'Janeiro | 8888' },
-                        { value: '2', label: 'Fevereiro | 8888' },
-                        { value: '3', label: 'Março | 8888' },
-                        { value: '4', label: 'Abril | 8888' },
-                        { value: '5', label: 'Maio | 8888' },
-                        { value: '6', label: 'Junho | 8888' },
-                        { value: '7', label: 'Julho | 8888' },
-                        { value: '8', label: 'Agosto | 8888' },
-                        { value: '9', label: 'Setembro | 8888' },
-                        { value: '10', label: 'Outubro | 8888' },
-                        { value: '11', label: 'Novembro | 8888' },
-                        { value: '12', label: 'Dezembro | 8888' },
-                    ]}
-                />
-
-                <HeaderContent>
-                    <Card title='Entradas' value='17400.50' icon={FiArrowUpCircle} iconColor='#12A454' />
-                    <Card title='Saídas' value='7400.50' icon={FiArrowDownCircle} iconColor='#E83F5B' />
-                    <Card title='Total' value='-1000.00' icon={FiDollarSign} iconColor='#E83F5B' />{' '}
-                    {/* Total se for negatio mostra vermelho, se for positivo mostra verde */}
+                    <div>
+                        <Month>
+                            <span>Mês vigente</span>
+                            <ReactSelect
+                                classNamePrefix='month-selector'
+                                placeholder='Dezembro | 2020'
+                                options={[
+                                    { value: '1', label: 'Janeiro | 8888' },
+                                    { value: '2', label: 'Fevereiro | 8888' },
+                                    { value: '3', label: 'Março | 8888' },
+                                    { value: '4', label: 'Abril | 8888' },
+                                    { value: '5', label: 'Maio | 8888' },
+                                    { value: '6', label: 'Junho | 8888' },
+                                    { value: '7', label: 'Julho | 8888' },
+                                    { value: '8', label: 'Agosto | 8888' },
+                                    { value: '9', label: 'Setembro | 8888' },
+                                    { value: '10', label: 'Outubro | 8888' },
+                                    { value: '11', label: 'Novembro | 8888' },
+                                    { value: '12', label: 'Dezembro | 8888' },
+                                ]}
+                            />
+                        </Month>
+                        <Card title='Receitas' value='17400.50' icon={FiArrowUpCircle} iconColor='#12A454' />
+                        <Card title='Despesas' value='7400.50' icon={FiArrowDownCircle} iconColor='#E83F5B' />
+                        <Card title='Total' value='-1000.00' icon={FiDollarSign} iconColor='#E83F5B' />{' '}
+                    </div>
                 </HeaderContent>
             </Header>
 

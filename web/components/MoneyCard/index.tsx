@@ -12,10 +12,10 @@ type CardProps = {
 
 const MoneyCard: React.FC<CardProps> = ({ title, value, icon: Icon, iconColor }: CardProps) => {
     return (
-        <Container>
+        <Container className='card'>
             <div>
                 <p>{title}</p>
-                <Icon size={32} color={iconColor} />
+                <Icon size={18} color={iconColor} />
             </div>
 
             <strong>R$ {value}</strong>

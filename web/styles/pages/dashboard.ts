@@ -14,42 +14,52 @@ interface ContentSectionProps {
 export const Container = styled.div``
 
 export const Header = styled.header`
-    padding: 32px;
-    height: 240px;
+    padding: 24px 64px;
     background: #4963f4;
 `
 
 export const HeaderContent = styled.div`
-    max-width: 1120px;
     margin: 0 auto;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
 
-    > img {
-        height: 80px;
+    > div {
+        display: flex;
+        align-items: center;
+
+        > svg {
+            margin-right: 32px;
+            color: #fff;
+        }
+
+        div.card {
+            margin-left: 16px;
+        }
+    }
+`
+
+export const Month = styled.div`
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    > div {
+        margin: 0;
     }
 
-    > div.menu {
-        margin-left: auto;
-
-        button {
-            background: transparent;
-            border: 0;
-
-            svg {
-                color: #fff;
-                width: 20px;
-                height: 20px;
-            }
-        }
+    span {
+        margin-bottom: -10px;
+        padding: 0 8px;
+        font-weight: 300;
     }
 `
 
 export const ReactSelect = styled(ReactSelector)`
     margin: 0 auto;
     margin-top: 14px;
-    width: 1120px;
     font-size: 24px;
     font-weight: medium;
     color: #fff;
